@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="layouts/base_layout">
+
+<title th:text="${title}"></title>
+</head>
+<body>
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-md-6">
+
+
+
+				<!-- Mensaje flash que nos mostrará si se ha guardado con éxito el registro -->
+
+				<div class="alert alert-success" th:if="${success != null}"
+					th:text="${success}"></div>
+
+
+				<div class="card mt-5">
+					<div class="card-header bg-info text-center">Subida imágenes
+						- Spring</div>
+
+					<div class="card-body">
+						<form th:action="@{/}" th:object="${user}" method="post" enctype="multipart/form-data">
+
+							<div class="row form-group">
+								<label class="col-md-3">Nombre</label> 
+								<input type="text" th:field="*{nombre}" class="form-control col-md-8" th:errorclass="'form-control alert-danger'"> 
+								<small class="form-text text-danger offset-3" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
+							</div>
+
+							<div class="row form-group ">
+								<label class="col-md-3">Apellidos</label> 
+								<input type="text" th:field="*{apellidos}" class="form-control col-md-8" th:errorclass="'form-control alert-danger'"> 
+								<small class="form-text text-danger offset-3" th:if="${#fields.hasErrors('apellidos')}" th:errors="*{apellidos}"></small>
+							</div>
+
+							<div class="row form-group">
+								<label class="col-md-3">Email</label>
+								<input type="text" th:field="*{email}" class="form-control col-md-8" th:errorclass="'form-control alert-danger'">
+								<small class="form-text text-danger offset-3" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></small>
+							</div>
+
+							<div class="row form-group">
+								<label class="col-md-3">Foto</label> 
+								<input type="file" name="file_foto" class="m-1"/>
+							</div>
+
+							<button type="submit" class="btn btn-success col-md-8 offset-3 mt-3">Guardar</button>
+
+						</form>
+					</div>
+
+				</div>
+
+
+			</div>
+
+		</div>
+		<div class="m-5">
+			<a th:href="@{/listar}"><button class="btn btn-primary">Ver
+					Fotos</button></a>
+		</div>
+	</div>
+
+</body>
+</html>
